@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 /**
  * Created by dzieszk on 06.01.18.
  */
@@ -26,8 +28,8 @@ public class NoteDBHelper extends SQLiteOpenHelper {
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NOTES + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    COLUMN_TITLE + " TEXT, " +
-                    COLUMN_CONTENT + " TEXT" +
+                    COLUMN_TITLE + " TEXT NOT NULL, " +
+                    COLUMN_CONTENT + " TEXT NOT NULL" +
                     ")";
 
     public NoteDBHelper(Context context){
@@ -64,6 +66,18 @@ public class NoteDBHelper extends SQLiteOpenHelper {
         Note note = cursorToNote(cursor);
         cursor.close();
         return note;
+    }
+
+    public ArrayList<Note> getNotes(){
+        ArrayList<Note> notes = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_NOTES;
+        Cursor cursor = getReadableDatabase().rawQuery(query, null);
+        while(cursor.moveToNext()){
+            Note note = cursorToNote(cursor);
+            notes.add(note);
+        }
+        cursor.close();
+        return notes;
     }
 
     public Note cursorToNote(Cursor cursor){
