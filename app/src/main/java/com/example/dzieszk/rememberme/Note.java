@@ -1,5 +1,7 @@
 package com.example.dzieszk.rememberme;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by dzieszk on 06.01.18.
  */
@@ -7,6 +9,7 @@ package com.example.dzieszk.rememberme;
 public class Note {
     private String title;
     private String content;
+    private String image;
 
     public String getTitle() {
         return title;
@@ -22,5 +25,13 @@ public class Note {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

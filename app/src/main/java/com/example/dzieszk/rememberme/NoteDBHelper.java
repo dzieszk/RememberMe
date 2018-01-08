@@ -5,8 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -24,12 +27,14 @@ public class NoteDBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ID = "NOTE_ID";
     public static final String COLUMN_TITLE = "NOTE_TITLE";
     public static final String COLUMN_CONTENT = "NOTE_CONTENT";
+    public static final String COLUMN_IMAGE = "NOTE_IMAGE";
 
     private static final String TABLE_CREATE =
             "CREATE TABLE " + TABLE_NOTES + " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COLUMN_TITLE + " TEXT NOT NULL, " +
-                    COLUMN_CONTENT + " TEXT NOT NULL" +
+                    COLUMN_CONTENT + " TEXT NOT NULL, " +
+                    COLUMN_IMAGE + " TEXT" +
                     ")";
 
     public NoteDBHelper(Context context){
@@ -46,7 +51,17 @@ public class NoteDBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public Note getNote(int id){
+    public boolean addNote(String title, String content, String image){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_TITLE, title);
+        cv.put(COLUMN_CONTENT, content);
+        cv.put(COLUMN_IMAGE, image);
+        db.insert(TABLE_NOTES, null, cv);
+        return true;
+    }
+
+        public Note getNote(int id){
         Note note = new Note();
         String query = "SELECT * FROM " + TABLE_NOTES +
                 " WHERE " + COLUMN_ID + " = " + String.valueOf(id);
@@ -84,6 +99,7 @@ public class NoteDBHelper extends SQLiteOpenHelper {
         Note note = new Note();
         note.setTitle(cursor.getString(1));
         note.setContent(cursor.getString(2));
+        note.setImage(cursor.getString(3));
         return note;
     }
 

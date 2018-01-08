@@ -11,8 +11,7 @@
     <ImageView
         android:id="@+id/item_image"
         android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:tint="@color/colorAccent" />
+        android:layout_height="48dp" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
