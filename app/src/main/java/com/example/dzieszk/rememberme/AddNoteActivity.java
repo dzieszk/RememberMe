@@ -1,12 +1,10 @@
 package com.example.dzieszk.rememberme;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,9 +30,9 @@ public class AddNoteActivity extends AppCompatActivity {
     }
 
     public void saveNote(View view) {
-        EditText title = findViewById(R.id.noteTitle);
-        EditText content = findViewById(R.id.noteContent);
-        ImageView photo = findViewById(R.id.photo);
+        EditText title = findViewById(R.id.addTitle);
+        EditText content = findViewById(R.id.addContent);
+        ImageView photo = findViewById(R.id.addPhoto);
         if(title.getText().toString().length() == 0){
             title.setError("Tytuł nie może być pusty!");
             return;
@@ -75,7 +73,7 @@ public class AddNoteActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            ImageView imageView = findViewById(R.id.photo);
+            ImageView imageView = findViewById(R.id.addPhoto);
             File imgFile = new File(mCurrentPhotoPath);
             if(imgFile.exists()){
                 imageView.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));

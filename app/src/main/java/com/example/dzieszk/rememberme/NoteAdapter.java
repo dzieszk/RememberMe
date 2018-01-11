@@ -1,9 +1,13 @@
 package com.example.dzieszk.rememberme;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -23,8 +27,10 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     private ArrayList<Note> notes;
     private NoteDBHelper helper;
+    private Context context;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        public int id;
         public TextView title;
         public TextView content;
         public ImageView image;
@@ -37,7 +43,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         }
     }
 
-    public NoteAdapter(ArrayList<Note> notes, NoteDBHelper helper){
+    public NoteAdapter(ArrayList<Note> notes, NoteDBHelper helper, Context context){
+        this.context = context;
         this.notes = notes;
         this.helper = helper;
     }
@@ -50,8 +57,23 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position){
+        holder.id = notes.get(position).getId();
         holder.title.setText(notes.get(position).getTitle());
         holder.content.setText(notes.get(position).getContent());
+
+        holder.itemView.setOnClickListener(view -> {
+            Note note = helper.getNote(holder.id);
+            Intent intent = new Intent(context, NoteActivity.class);
+            intent.putExtra("title", note.getTitle());
+            intent.putExtra("content", note.getContent());
+            intent.putExtra("image", note.getImage());
+            context.startActivity(intent);
+        });
+
+        holder.itemView.setOnCreateContextMenuListener((contextMenu, view, contextMenuInfo) -> {
+            contextMenu.add(Menu.NONE, MainActivity.MENU_EDIT, holder.id, "Edit");
+            contextMenu.add(Menu.NONE, MainActivity.MENU_DELETE, holder.id, "Delete");
+        });
 
         if(notes.get(position).getImage() == null) {
             ColorGenerator generator = ColorGenerator.MATERIAL;
@@ -74,6 +96,9 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
                 bmOptions.inSampleSize = scaleFactor;
                 bmOptions.inPurgeable = true;
                 holder.image.setImageBitmap(BitmapFactory.decodeFile(notes.get(position).getImage(), bmOptions));
+            }
+            else{
+                holder.image.setImageResource(R.drawable.ic_error_black_24dp);
             }
         }
     }

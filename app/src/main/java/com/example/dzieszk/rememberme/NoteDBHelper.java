@@ -61,14 +61,20 @@ public class NoteDBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean removeNote(int id){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NOTES +
+                " WHERE " + COLUMN_ID + " = " + String.valueOf(id);
+        db.execSQL(query);
+        return true;
+    }
+
         public Note getNote(int id){
-        Note note = new Note();
         String query = "SELECT * FROM " + TABLE_NOTES +
                 " WHERE " + COLUMN_ID + " = " + String.valueOf(id);
         Cursor cursor= getReadableDatabase().rawQuery(query, null);
         cursor.moveToNext();
-        note.setTitle(cursor.getString(1));
-        note.setContent(cursor.getString(2));
+        Note note = cursorToNote(cursor);
         cursor.close();
         return note;
     }
@@ -97,6 +103,7 @@ public class NoteDBHelper extends SQLiteOpenHelper {
 
     public Note cursorToNote(Cursor cursor){
         Note note = new Note();
+        note.setId(cursor.getInt(0));
         note.setTitle(cursor.getString(1));
         note.setContent(cursor.getString(2));
         note.setImage(cursor.getString(3));

@@ -7,6 +7,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -16,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Note> notes = new ArrayList<>();
     private NoteDBHelper helper = new NoteDBHelper(this);
     private NoteAdapter adapter;
+
+    public static final int MENU_EDIT = 0;
+    public static final int MENU_DELETE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new NoteAdapter(helper.getNotes(), helper);
+        adapter = new NoteAdapter(helper.getNotes(), helper, this);
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), LinearLayoutManager.VERTICAL));
     }
@@ -44,5 +48,18 @@ public class MainActivity extends AppCompatActivity {
     public void addNote(View view) {
         Intent intent = new Intent(this, AddNoteActivity.class);
         startActivityForResult(intent, 0);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case MENU_EDIT:
+                break;
+            case MENU_DELETE:
+                helper.removeNote(item.getOrder());
+                adapter.update(helper.getNotes());
+                break;
+        }
+        return true;
     }
 }

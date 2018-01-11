@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.dzieszk.rememberme.AddNoteActivity">
+    tools:context="com.example.dzieszk.rememberme.NoteActivity">
 
     <EditText
-        android:id="@+id/addTitle"
+        android:id="@+id/noteTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:maxLength="32"
+        android:longClickable="false"
         android:hint="Write Title"
         android:inputType="textCapSentences"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -22,59 +22,36 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.dzieszk.rememberme.LinedEditText
-        android:id="@+id/addContent"
+        android:id="@+id/noteContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:background="@android:color/transparent"
+        android:longClickable="false"
         android:gravity="top|center_vertical"
         android:hint="Write Your Note"
         android:inputType="textMultiLine"
-        android:lines="3"
+        android:lines="5"
+        android:background="@android:color/transparent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addTitle" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/buttonAddPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:clickable="true"
-        android:onClick="addPhoto"
-        android:src="@drawable/ic_camera_alt_black_24dp"
-        android:tint="#fff"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddNote"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/buttonAddNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:clickable="true"
-        android:onClick="saveNote"
-        android:src="@drawable/ic_save_black_24dp"
-        android:tint="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/noteTitle" />
 
     <ImageView
-        android:id="@+id/addPhoto"
+        android:id="@+id/photo"
         android:layout_width="192dp"
         android:layout_height="192dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:visibility="invisible"
+        android:visibility="gone"
+        android:clickable="true"
+        android:onClick="openPhoto"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
