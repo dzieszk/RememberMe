@@ -1,7 +1,20 @@
 <resources>
-    <string name="app_name">RememberMe</string>
+    <string name="app_name" translatable="false">RememberMe</string>
 
-    <string name="title_activity_fullscreen_photo">FullscreenPhotoActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_fullscreen_photo" translatable="false">FullscreenPhotoActivity</string>
+    <string name="dummy_button" translatable="false">Dummy Button</string>
+    <string name="dummy_content" translatable="false">DUMMY\nCONTENT</string>
+    <string name="title_error">Title cannot be empty!</string>
+    <string name="content_error">Note cannot be empty!</string>
+    <string name="backup">Create backup</string>
+    <string name="edit_mode">Edit mode</string>
+    <string name="view_mode">View mode</string>
+    <string name="backup_confirm">Are you sure you want to create backup?</string>
+    <string name="yes">Yes</string>
+    <string name="nope">No</string>
+    <string name="delete_confirm">Are you sure you want to delete this note?</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="write_title">Write title</string>
+    <string name="write_note">Write Your Note</string>
 </resources>

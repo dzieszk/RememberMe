@@ -34,11 +34,11 @@ public class AddNoteActivity extends AppCompatActivity {
         EditText content = findViewById(R.id.addContent);
         ImageView photo = findViewById(R.id.addPhoto);
         if(title.getText().toString().length() == 0){
-            title.setError("Tytuł nie może być pusty!");
+            title.setError(getString(R.string.title_error));
             return;
         }
         if(content.getText().toString().length() == 0){
-            content.setError("Notatka nie może być pusta");
+            content.setError(getString(R.string.content_error));
             return;
         }
         if(photo.getDrawable() != null){

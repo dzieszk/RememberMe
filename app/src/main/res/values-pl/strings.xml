@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RememberMe</string>
+    <string name="title_error">Tytuł nie może być pusty!</string>
+    <string name="content_error">Notatka nie może być pusta!</string>
+    <string name="backup">Tworzenie kopii zapasowej</string>
+    <string name="edit_mode">Tryb edycji</string>
+    <string name="view_mode">Tryb widoku</string>
+    <string name="backup_confirm">Czy na pewno chcesz utworzyć kopię zapasową?</string>
+    <string name="yes">Tak</string>
+    <string name="nope">Nie</string>
+    <string name="delete_confirm">Czy na pewno chcesz usunąć tę notatkę?</string>
+    <string name="edit">Edytuj</string>
+    <string name="delete">Usuń</string>
+    <string name="write_title">Napisz tytuł</string>
+    <string name="write_note">Napisz notatkę</string>
+</resources>

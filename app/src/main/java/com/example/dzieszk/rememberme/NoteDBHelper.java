@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -42,6 +43,10 @@ public class NoteDBHelper extends SQLiteOpenHelper {
         this.context = context;
     }
 
+    public int size(){
+        return getNotes().size();
+    }
+
     public boolean addNote(String title, String content){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -61,8 +66,22 @@ public class NoteDBHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean updateNote(int id, String title, String content){
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "UPDATE " + TABLE_NOTES + " SET " +
+                COLUMN_TITLE + " = '" + title + "', " +
+                COLUMN_CONTENT + " = '" + content + "'" +
+                " WHERE " + COLUMN_ID + " = " + String.valueOf(id);
+        db.execSQL(query);
+        return true;
+    }
+
     public boolean removeNote(int id){
         SQLiteDatabase db = getWritableDatabase();
+        if(getNote(id).getImage() != null) {
+            File file = new File(getNote(id).getImage());
+            if (file.exists()) file.delete();
+        }
         String query = "DELETE FROM " + TABLE_NOTES +
                 " WHERE " + COLUMN_ID + " = " + String.valueOf(id);
         db.execSQL(query);

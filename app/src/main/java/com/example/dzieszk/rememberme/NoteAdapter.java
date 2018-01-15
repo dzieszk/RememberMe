@@ -64,6 +64,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(view -> {
             Note note = helper.getNote(holder.id);
             Intent intent = new Intent(context, NoteActivity.class);
+            intent.putExtra("id", note.getId());
             intent.putExtra("title", note.getTitle());
             intent.putExtra("content", note.getContent());
             intent.putExtra("image", note.getImage());
@@ -71,8 +72,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         });
 
         holder.itemView.setOnCreateContextMenuListener((contextMenu, view, contextMenuInfo) -> {
-            contextMenu.add(Menu.NONE, MainActivity.MENU_EDIT, holder.id, "Edit");
-            contextMenu.add(Menu.NONE, MainActivity.MENU_DELETE, holder.id, "Delete");
+            contextMenu.add(Menu.NONE, MainActivity.MENU_EDIT, holder.id, R.string.edit);
+            contextMenu.add(Menu.NONE, MainActivity.MENU_DELETE, holder.id, R.string.delete);
         });
 
         if(notes.get(position).getImage() == null) {

@@ -14,7 +14,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:longClickable="false"
         android:hint="Write Title"
         android:inputType="textCapSentences"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,7 +28,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:longClickable="false"
         android:gravity="top|center_vertical"
         android:hint="Write Your Note"
         android:inputType="textMultiLine"
@@ -53,5 +51,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/buttonUpdateNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:clickable="true"
+        android:visibility="gone"
+        android:onClick="updateNote"
+        android:src="@drawable/ic_save_black_24dp"
+        android:tint="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
